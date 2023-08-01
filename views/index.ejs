@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Url Smally</title>
-</head>
-<body>
-   <div className="">
-    <h1>Url Reducer</h1>
-    <form action="/shortUrls" method="POST" className="">
+  </head>
+  <body>
+    <div className="container">
+      <h1>Url Reducer</h1>
+      <form action="/shortUrls" method="POST" className="">
         <label for="fulllUrl" className="">Url</label>
-        <input type="url" required placeholder="Url here...." name="fulllUrl" id="fulllUrl" className="">
+        <input
+          type="url"
+          required
+          placeholder="Url here...."
+          name="fulllUrl"
+          id="fulllUrl"
+          className=""
+        />
         <button className="">reduce</button>
-    </form>
-    <table className="table">
+      </form>
+      <table className="table">
         <thead>
-            <tr>
-                <th>Full URL</th>
-                <th>Short URL</th>
-                <th>Clicks</th>
-             </tr>
+          <tr>
+            <th>Full URL</th>
+            <th>Short URL</th>
+            <th>Clicks</th>
+          </tr>
         </thead>
         <tbody>
+          <% shortUrls.forEach(shortUrl => { %>
           <tr>
-            <td><a href="https://"></a></td>
-            <td><a href="/123456">123456</a></td>
-            <td>10</td>
+            <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+            <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+            <td><% shortUrl.clicks %></td>
           </tr>
+          <% }) %>
         </tbody>
-    </table>
-   </div> 
-</body>
+      </table>
+    </div>
+  </body>
 </html>
