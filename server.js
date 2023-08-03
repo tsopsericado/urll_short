@@ -1,13 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
+const bodyparser = require("body-parser");
 const ShortUrl = require("./models/shortUrl");
-const shortUrl = require("./models/shortUrl");
+const app = express();
 
-mongoose.connect("mongodb://localhost/urlShortener", {
-  userNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://ricardotsopse:QgUb1SZlYwacxBGS@rb-mongo-intro.xsyoqfd.mongodb.net/?retryWrites=true&w=majority",
+  {
+  
+  }
+);
 app.set("view engine", "ejs");
 app.use(express.urlencoded({extended:false}))
 
@@ -26,7 +28,8 @@ app.post("shortUrls/", async (req, res) => {
 // getting the shortened url
 app.get('/:shortUrl', async (req, res)=> {
     const shortUrl = await shortUrl.findOne({ short: req.params.shortUrl })
-    if (shortUrl == null) return res.sendStatus(404)
+    if (shortUrl == null) 
+     return res.sendStatus(404)
       
     shortUrl.clicks++
     shortUrl.save()
