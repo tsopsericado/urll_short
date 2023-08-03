@@ -5,9 +5,10 @@ const ShortUrl = require("./models/shortUrl");
 const app = express();
 
 mongoose.connect(
-  "mongodb+srv://ricardotsopse:QgUb1SZlYwacxBGS@rb-mongo-intro.xsyoqfd.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://ricardotsopse:eoueei1ZOLnX6FKK@url-shortener.jys0zri.mongodb.net/?retryWrites=true&w=majority",
   {
-  
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   }
 );
 app.set("view engine", "ejs");
@@ -15,19 +16,22 @@ app.use(express.urlencoded({extended:false}))
 
 
 app.get("/", async(req, res) => {
- const shortUrls = await ShortUrl.find()
+ const shortUrls = 
+ await ShortUrl.find()
    res.render("index", { shortUrls: shortUrls});
 });
    
 // Creating a short url
-app.post("shortUrls/", async (req, res) => {
+app.post("/shortUrl", async (req, res) => {
   await  ShortUrl.create({full: req.body.fullUrl})
+  console.log(req.body.full);
   res.redirect('/')
 });
 
 // getting the shortened url
 app.get('/:shortUrl', async (req, res)=> {
-    const shortUrl = await shortUrl.findOne({ short: req.params.shortUrl })
+    const shortUrl = 
+    await ShortUrl.findOne({ short: req.params.shortUrl })
     if (shortUrl == null) 
      return res.sendStatus(404)
       

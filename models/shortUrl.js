@@ -1,4 +1,4 @@
-const mongoose = require("../db");
+const mongoose = require("mongoose");
 const shortId = require("shortid");
 
 const shortUrlSchema = new mongoose.Schema({
@@ -8,19 +8,19 @@ const shortUrlSchema = new mongoose.Schema({
   },
   short: {
     type: String,
-    required: true,
+    // required: true,
     default: shortId.generate
   },
   clicks: {
     type: Number,
-    required: true,
+    // required: true,
     default: 0
   },
 });
 
-// module.exports = mongoose.model("ShortUrl", shortUrlSchema);
+module.exports = mongoose.model("ShortUrl", shortUrlSchema);
 
-const ShortUrl = mongoose.models("shortUrl", shortUrlSchema);
+// const ShortUrl = mongoose.models("shortUrl", shortUrlSchema);
 
-module.exports = ShortUrl; 
+// module.exports = ShortUrl; 
 
